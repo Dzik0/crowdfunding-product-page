@@ -1,11 +1,29 @@
-@import 'tailwindcss';
+@import url("https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-my-green-400: hsl(176, 50%, 47%);
+  --color-my-green-700: hsl(176, 72%, 28%);
+  --color-my-black: hsl(0, 0%, 0%);
+  --color-my-gray-100: hsl(0, 0%, 96%);
+  --color-my-gray-500: hsl(0, 0%, 48%);
+
+  --breakpoint-md: 800px;
+  --breakpoint-xl: 1440px;
+}
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  background-color: hsl(0, 0%, 96%);
+}
+
 body {
   min-height: 100vh;
+  font-family: "Commissioner", monospace;
+  background-color: hsl(0, 0%, 96%);
 }
 
 img {
