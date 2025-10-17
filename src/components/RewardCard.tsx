@@ -23,7 +23,7 @@ export default function RewardCard({ rewardInfo }: RewardCardProps) {
         <div className="">
           <button
             className={clsx(
-              `${rewardInfo.left === 0 ? "bg-my-gray-500 opacity-30" : "bg-my-green-400"} w-[75%] rounded-[10rem] p-4 text-sm font-bold text-white md:w-[10rem] xl:w-[12rem]`,
+              `${rewardInfo.left === 0 ? "bg-my-gray-500 cursor-not-allowed opacity-30" : "bg-my-green-400 hover:bg-my-green-700 cursor-pointer"} w-[75%] rounded-[10rem] p-4 text-sm font-bold text-white md:w-[10rem] xl:w-[12rem]`,
             )}
           >
             {rewardInfo.left === 0 ? "Out of stock" : "Select Reward"}

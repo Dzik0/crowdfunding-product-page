@@ -11,9 +11,13 @@ export default function HeaderPc() {
           </div>
           <div>
             <ul className="flex gap-8 text-white">
-              <li>About</li>
-              <li>Discover</li>
-              <li>Get started</li>
+              <li className="hover:text-my-green-400 cursor-pointer">About</li>
+              <li className="hover:text-my-green-400 cursor-pointer">
+                Discover
+              </li>
+              <li className="hover:text-my-green-400 cursor-pointer">
+                Get started
+              </li>
             </ul>
           </div>
         </div>
