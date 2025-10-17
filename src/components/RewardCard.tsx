@@ -1,23 +1,34 @@
-export default function RewardCard() {
+import type { Reward } from "../rewards";
+import clsx from "clsx";
+
+type RewardCardProps = {
+  rewardInfo: Reward;
+};
+
+export default function RewardCard({ rewardInfo }: RewardCardProps) {
   return (
-    <div className="grid gap-5 rounded-xl border border-gray-300 p-5">
-      <div className="grid gap-1">
-        <h4 className="font-bold">Bamboo Stand</h4>
-        <p className="text-my-green-400">Pledge $25 or more</p>
+    <div className="grid gap-5 rounded-xl border border-gray-300 p-5 xl:p-8">
+      <div className="flex flex-col gap-1 md:flex-row md:justify-between">
+        <h4 className="font-bold xl:text-xl">{rewardInfo.title}</h4>
+        <p className="text-my-green-400">Pledge ${rewardInfo.price} or more</p>
       </div>
-      <p className="text-my-gray-500 text-sm font-light">
-        You get an ergonomic stand made of natural bamboo. You've helped us
-        launch our promotional campaign, and you'll be added to a special Backer
-        member list.
+      <p className="text-my-gray-500 text-sm font-light xl:text-base xl:leading-8">
+        {rewardInfo.info}
       </p>
-      <div className="flex items-center gap-2">
-        <div className="text-3xl font-bold">101</div>
-        <div className="text-my-gray-500">left</div>
-      </div>
-      <div>
-        <button className="bg-my-green-400 w-[75%] rounded-[10rem] p-4 text-sm font-bold text-white">
-          Select Reward
-        </button>
+      <div className="flex flex-col gap-5 md:flex-row md:justify-between">
+        <div className="flex items-center gap-2">
+          <div className="text-3xl font-bold">{rewardInfo.left}</div>
+          <div className="text-my-gray-500">left</div>
+        </div>
+        <div className="">
+          <button
+            className={clsx(
+              `${rewardInfo.left === 0 ? "bg-my-gray-500 opacity-30" : "bg-my-green-400"} w-[75%] rounded-[10rem] p-4 text-sm font-bold text-white md:w-[10rem] xl:w-[12rem]`,
+            )}
+          >
+            {rewardInfo.left === 0 ? "Out of stock" : "Select Reward"}
+          </button>
+        </div>
       </div>
     </div>
   );
