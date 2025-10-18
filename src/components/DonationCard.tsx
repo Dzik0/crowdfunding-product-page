@@ -1,15 +1,38 @@
+import { useState } from "react";
 import type { Reward } from "../rewards";
 import clsx from "clsx";
 
 type DonationCardProps = {
   info: Reward;
   handleActivePledge: () => void;
+  addDonation: (num: string) => void;
 };
 
 export default function DonationCard({
   info,
   handleActivePledge,
+  addDonation,
 }: DonationCardProps) {
+  const [amount, setAmount] = useState<string>("");
+
+  const error = amount !== "" && Number(amount) < info.price;
+
+  const errorMsg = error ? (
+    <div className="mt-2 text-center text-sm text-red-500">
+      Pledge amount must be greater than ${info.price}
+    </div>
+  ) : (
+    ""
+  );
+
+  function handleSubmit() {
+    if (Number(amount) < info.price) {
+      alert("WRONG NUMBER");
+      return;
+    }
+    addDonation(amount);
+  }
+
   const pledgeElement = info.active ? (
     <div>
       <div className="mb-5 border-b border-gray-200"></div>
@@ -23,37 +46,46 @@ export default function DonationCard({
               name={`dono-${info.id}`}
               id="dono"
               min={info.price}
-              placeholder="10"
+              onChange={(e) => {
+                setAmount(e.target.value);
+              }}
+              placeholder={info.price.toString()}
+              value={amount}
               className="w-1/2 text-center font-bold outline-0"
             />
           </div>
-          <button className="bg-my-green-400 hover:bg-my-green-700 basis-1/2 rounded-3xl p-2 text-white">
+          <button
+            disabled={error ? true : false}
+            onClick={handleSubmit}
+            className={clsx(
+              `basis-1/2 rounded-3xl p-2 text-white ${error ? "bg-gray-300 hover:bg-gray-300" : "hover:bg-my-green-700 bg-my-green-400"}`,
+            )}
+          >
             Continue
           </button>
         </div>
       </div>
+      {errorMsg}
     </div>
   ) : (
     ""
   );
   return (
     <div
+      onClick={handleActivePledge}
       className={clsx(
-        `grid gap-5 rounded-xl ${info.active ? "border-my-green-400 border-2" : "border border-gray-200"} p-4`,
+        `grid gap-5 rounded-xl ${info.active ? "border-my-green-400 border-2" : "border border-gray-200"} cursor-pointer p-4`,
       )}
     >
       <div className="flex items-center gap-4">
-        <button
-          className="flex h-6 w-6 items-center justify-center rounded-[50%] border border-gray-400"
-          onClick={handleActivePledge}
-        >
+        <div className="flex h-6 w-6 items-center justify-center rounded-[50%] border border-gray-400">
           {info.active ? (
             <span className="bg-my-green-400 h-3 w-3 rounded-[50%]"></span>
           ) : (
             ""
           )}
-        </button>
-        <div>
+        </div>
+        <div className="text-left">
           <h3>{info.title}</h3>
           {info.left === 999 ? (
             ""
@@ -64,7 +96,7 @@ export default function DonationCard({
           )}
         </div>
       </div>
-      <p className="text-my-gray-500 text-sm">{info.info}</p>
+      <p className="text-my-gray-500 text-left text-sm">{info.info}</p>
       <div className="flex gap-2">
         <p className="text-xl font-bold">
           {info.left === 999 ? "Unlimited" : info.left}

@@ -7,6 +7,7 @@ type DonationComponentProps = {
   stateMenu: boolean;
   rewards: Reward[];
   handleActivePledge: (id: number) => void;
+  addDonation: (num: string) => void;
 };
 
 export default function DonationComponent({
@@ -14,6 +15,7 @@ export default function DonationComponent({
   stateMenu,
   rewards,
   handleActivePledge,
+  addDonation,
 }: DonationComponentProps) {
   return (
     <div
@@ -39,6 +41,7 @@ export default function DonationComponent({
             handleActivePledge={() => {
               handleActivePledge(item.id);
             }}
+            addDonation={addDonation}
           />
         ))}
       </div>

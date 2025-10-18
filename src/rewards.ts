@@ -16,7 +16,7 @@ export const data: Reward[] = [
         via email.`,
     price: 1,
     left: 999,
-    active: true,
+    active: false,
   },
   {
     id: 1,

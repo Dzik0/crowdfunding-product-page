@@ -69,6 +69,15 @@ export default function App() {
     );
   }
 
+  function addDonation(num: string): void {
+    const newFunded = fundRaiser.funded + Number(num);
+    setFundRaiser((pS) => ({
+      ...pS,
+      funded: newFunded,
+      backers: pS.backers + 1,
+    }));
+  }
+
   return (
     <main className="relative pb-10">
       <DonationComponent
@@ -78,6 +87,7 @@ export default function App() {
         }}
         rewards={rewards}
         handleActivePledge={handleActivePledge}
+        addDonation={addDonation}
       />
       <div
         className={clsx(
