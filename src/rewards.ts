@@ -14,9 +14,9 @@ export const data: Reward[] = [
     info: `Choose to support us without a reward if you simply believe in our
     project. As a backer, you will be signed up to recieve product updates
         via email.`,
-    price: 0,
+    price: 1,
     left: 999,
-    active: false,
+    active: true,
   },
   {
     id: 1,

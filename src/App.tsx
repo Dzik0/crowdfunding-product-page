@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import HeaderMobile from "./components/HeaderMobile";
-import bookmark from "/icon-bookmark.svg";
 import masterLogo from "/logo-mastercraft.svg";
 import RewardCard from "./components/RewardCard";
 import HeaderPc from "./components/HeaderPc";
@@ -59,6 +58,17 @@ export default function App() {
     return firstPart + "," + secondPart;
   }
 
+  function handleActivePledge(id: number): void {
+    setRewards((pS) =>
+      pS.map(
+        (item: Reward): Reward =>
+          item.id === id
+            ? { ...item, active: true }
+            : { ...item, active: false },
+      ),
+    );
+  }
+
   return (
     <main className="relative pb-10">
       <DonationComponent
@@ -67,6 +77,7 @@ export default function App() {
           setDonationMenu(false);
         }}
         rewards={rewards}
+        handleActivePledge={handleActivePledge}
       />
       <div
         className={clsx(

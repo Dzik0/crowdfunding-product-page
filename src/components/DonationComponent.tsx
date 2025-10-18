@@ -6,12 +6,14 @@ type DonationComponentProps = {
   handleMenu: () => void;
   stateMenu: boolean;
   rewards: Reward[];
+  handleActivePledge: (id: number) => void;
 };
 
 export default function DonationComponent({
   handleMenu,
   stateMenu,
   rewards,
+  handleActivePledge,
 }: DonationComponentProps) {
   return (
     <div
@@ -31,7 +33,13 @@ export default function DonationComponent({
       </p>
       <div className="grid gap-6">
         {rewards.map((item) => (
-          <DonationCard info={item} />
+          <DonationCard
+            key={item.id}
+            info={item}
+            handleActivePledge={() => {
+              handleActivePledge(item.id);
+            }}
+          />
         ))}
       </div>
     </div>
