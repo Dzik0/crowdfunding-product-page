@@ -9,6 +9,7 @@ import { fundData } from "./fund";
 import type { Reward } from "./rewards";
 import type { Fund } from "./fund";
 import DonationComponent from "./components/DonationComponent";
+import DoneMessage from "./components/DoneMessage";
 
 type styleProps = {
   width: string;
@@ -21,8 +22,10 @@ export default function App() {
   const [showBar, setShowBar] = useState<boolean>(false);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [donationMenu, setDonationMenu] = useState<boolean>(false);
+  const [donated, setDonated] = useState<boolean>(false);
   const rewardRefs = useRef<Record<number, HTMLDivElement | null>>({});
   const donationMenuRef = useRef<HTMLDivElement | null>(null);
+  const donateMsgRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const activeReward = rewards.find((item) => item.active === true);
@@ -125,10 +128,27 @@ export default function App() {
         addDonation={addDonation}
         setRef={handleRef}
         donationMenuRef={donationMenuRef}
+        closeDonationMenu={() => {
+          setDonationMenu(false);
+          setDonated(true);
+          setTimeout(() => {
+            donateMsgRef.current?.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }, 0);
+        }}
+      />
+      <DoneMessage
+        donated={donated}
+        closeWindow={() => {
+          setDonated(false);
+        }}
+        donateMsgRef={donateMsgRef}
       />
       <div
         className={clsx(
-          `${openMenu || donationMenu ? "absolute" : "hidden"} z-1 h-full w-full bg-black opacity-30`,
+          `${openMenu || donationMenu || donated ? "absolute" : "hidden"} z-1 h-full w-full bg-black opacity-30`,
         )}
       ></div>
       {/* HEADERS */}

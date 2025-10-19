@@ -10,6 +10,7 @@ type DonationComponentProps = {
   addDonation: (num: string, id: number) => void;
   setRef: (id: number, element: HTMLDivElement | null) => void;
   donationMenuRef: React.RefObject<HTMLDivElement | null>;
+  closeDonationMenu: () => void;
 };
 
 export default function DonationComponent({
@@ -20,6 +21,7 @@ export default function DonationComponent({
   addDonation,
   setRef,
   donationMenuRef,
+  closeDonationMenu,
 }: DonationComponentProps) {
   return (
     <div
@@ -51,6 +53,7 @@ export default function DonationComponent({
             }}
             addDonation={addDonation}
             setRef={setRef}
+            closeDonationMenu={closeDonationMenu}
           />
         ))}
       </div>

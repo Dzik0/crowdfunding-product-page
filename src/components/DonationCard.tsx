@@ -7,6 +7,7 @@ type DonationCardProps = {
   handleActivePledge: () => void;
   addDonation: (num: string, id: number) => void;
   setRef: (id: number, el: HTMLDivElement | null) => void;
+  closeDonationMenu: () => void;
 };
 
 export default function DonationCard({
@@ -14,11 +15,12 @@ export default function DonationCard({
   handleActivePledge,
   addDonation,
   setRef,
+  closeDonationMenu,
 }: DonationCardProps) {
   const [amount, setAmount] = useState<string>("");
 
-  const error = amount !== "" && Number(amount) < info.price;
-  const emptyInput = amount === "";
+  const error: boolean = amount !== "" && Number(amount) < info.price;
+  const emptyInput: boolean = amount === "";
 
   const errorMsg = error ? (
     <div className="mt-2 text-center text-sm text-red-500">
@@ -67,7 +69,10 @@ export default function DonationCard({
           </div>
           <button
             disabled={error || emptyInput ? true : false}
-            onClick={handleSubmit}
+            onClick={() => {
+              handleSubmit();
+              closeDonationMenu();
+            }}
             className={clsx(
               `basis-1/2 rounded-3xl p-2 text-white ${error || emptyInput ? "bg-gray-300 hover:bg-gray-300" : "hover:bg-my-green-700 bg-my-green-400"}`,
             )}
