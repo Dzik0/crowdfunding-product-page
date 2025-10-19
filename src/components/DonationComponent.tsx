@@ -7,7 +7,9 @@ type DonationComponentProps = {
   stateMenu: boolean;
   rewards: Reward[];
   handleActivePledge: (id: number) => void;
-  addDonation: (num: string) => void;
+  addDonation: (num: string, id: number) => void;
+  setRef: (id: number, element: HTMLDivElement | null) => void;
+  donationMenuRef: React.RefObject<HTMLDivElement | null>;
 };
 
 export default function DonationComponent({
@@ -16,16 +18,22 @@ export default function DonationComponent({
   rewards,
   handleActivePledge,
   addDonation,
+  setRef,
+  donationMenuRef,
 }: DonationComponentProps) {
   return (
     <div
+      ref={donationMenuRef}
       className={clsx(
         `${stateMenu ? "absolute" : "hidden"} top-15 right-5 left-5 z-5 grid gap-5 rounded-2xl bg-white p-5`,
       )}
     >
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-bold">Back this project</h2>
-        <button onClick={handleMenu} className="text-xl font-bold">
+        <button
+          onClick={handleMenu}
+          className="cursor-pointer text-xl font-bold"
+        >
           X
         </button>
       </div>
@@ -42,6 +50,7 @@ export default function DonationComponent({
               handleActivePledge(item.id);
             }}
             addDonation={addDonation}
+            setRef={setRef}
           />
         ))}
       </div>

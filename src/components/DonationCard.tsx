@@ -5,17 +5,20 @@ import clsx from "clsx";
 type DonationCardProps = {
   info: Reward;
   handleActivePledge: () => void;
-  addDonation: (num: string) => void;
+  addDonation: (num: string, id: number) => void;
+  setRef: (id: number, el: HTMLDivElement | null) => void;
 };
 
 export default function DonationCard({
   info,
   handleActivePledge,
   addDonation,
+  setRef,
 }: DonationCardProps) {
   const [amount, setAmount] = useState<string>("");
 
   const error = amount !== "" && Number(amount) < info.price;
+  const emptyInput = amount === "";
 
   const errorMsg = error ? (
     <div className="mt-2 text-center text-sm text-red-500">
@@ -30,7 +33,15 @@ export default function DonationCard({
       alert("WRONG NUMBER");
       return;
     }
-    addDonation(amount);
+    addDonation(amount, info.id);
+  }
+
+  function handleClick() {
+    if (info.left === 0) {
+      return;
+    }
+
+    handleActivePledge();
   }
 
   const pledgeElement = info.active ? (
@@ -55,10 +66,10 @@ export default function DonationCard({
             />
           </div>
           <button
-            disabled={error ? true : false}
+            disabled={error || emptyInput ? true : false}
             onClick={handleSubmit}
             className={clsx(
-              `basis-1/2 rounded-3xl p-2 text-white ${error ? "bg-gray-300 hover:bg-gray-300" : "hover:bg-my-green-700 bg-my-green-400"}`,
+              `basis-1/2 rounded-3xl p-2 text-white ${error || emptyInput ? "bg-gray-300 hover:bg-gray-300" : "hover:bg-my-green-700 bg-my-green-400"}`,
             )}
           >
             Continue
@@ -72,7 +83,10 @@ export default function DonationCard({
   );
   return (
     <div
-      onClick={handleActivePledge}
+      ref={(el) => {
+        setRef(info.id, el);
+      }}
+      onClick={handleClick}
       className={clsx(
         `grid gap-5 rounded-xl ${info.active ? "border-my-green-400 border-2" : "border border-gray-200"} cursor-pointer p-4`,
       )}

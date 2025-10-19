@@ -3,7 +3,7 @@ import HeaderMobile from "./components/HeaderMobile";
 import masterLogo from "/logo-mastercraft.svg";
 import RewardCard from "./components/RewardCard";
 import HeaderPc from "./components/HeaderPc";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { data } from "./rewards";
 import { fundData } from "./fund";
 import type { Reward } from "./rewards";
@@ -21,6 +21,20 @@ export default function App() {
   const [showBar, setShowBar] = useState<boolean>(false);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [donationMenu, setDonationMenu] = useState<boolean>(false);
+  const rewardRefs = useRef<Record<number, HTMLDivElement | null>>({});
+  const donationMenuRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const activeReward = rewards.find((item) => item.active === true);
+    if (activeReward && rewardRefs.current[activeReward.id]) {
+      setTimeout(() => {
+        rewardRefs.current[activeReward.id]?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }, 0);
+    }
+  }, [rewards]);
 
   //DERIVED STATES
   const displaymaxFund: string = numberDisplay(fundRaiser.goal);
@@ -31,7 +45,18 @@ export default function App() {
 
   //HTML Components
   const rewardsComp = rewards.map((item: Reward) =>
-    item.id > 0 ? <RewardCard key={item.id} rewardInfo={item} /> : null,
+    item.id > 0 ? (
+      <RewardCard
+        key={item.id}
+        rewardInfo={item}
+        handleMenu={() => {
+          setDonationMenu(true);
+        }}
+        handleActivePledge={() => {
+          handleActivePledge(item.id);
+        }}
+      />
+    ) : null,
   );
 
   //FUNCTIONS
@@ -69,13 +94,23 @@ export default function App() {
     );
   }
 
-  function addDonation(num: string): void {
+  function addDonation(num: string, id: number): void {
     const newFunded = fundRaiser.funded + Number(num);
     setFundRaiser((pS) => ({
       ...pS,
       funded: newFunded,
       backers: pS.backers + 1,
     }));
+
+    setRewards((pS) =>
+      pS.map((item) =>
+        item.id === id ? { ...item, left: item.left - 1 } : item,
+      ),
+    );
+  }
+
+  function handleRef(id: number, element: HTMLDivElement | null): void {
+    rewardRefs.current[id] = element;
   }
 
   return (
@@ -88,6 +123,8 @@ export default function App() {
         rewards={rewards}
         handleActivePledge={handleActivePledge}
         addDonation={addDonation}
+        setRef={handleRef}
+        donationMenuRef={donationMenuRef}
       />
       <div
         className={clsx(
@@ -122,6 +159,12 @@ export default function App() {
                 <button
                   onClick={() => {
                     setDonationMenu(true);
+                    setTimeout(() => {
+                      donationMenuRef.current?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                      });
+                    }, 0);
                   }}
                   className="bg-my-green-400 hover:bg-my-green-700 basis-3/4 cursor-pointer rounded-[10rem] p-4 font-bold text-white xl:max-w-[40%]"
                 >

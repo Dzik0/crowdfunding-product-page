@@ -3,9 +3,15 @@ import clsx from "clsx";
 
 type RewardCardProps = {
   rewardInfo: Reward;
+  handleMenu: () => void;
+  handleActivePledge: () => void;
 };
 
-export default function RewardCard({ rewardInfo }: RewardCardProps) {
+export default function RewardCard({
+  rewardInfo,
+  handleMenu,
+  handleActivePledge,
+}: RewardCardProps) {
   return (
     <div className="grid gap-5 rounded-xl border border-gray-300 p-5 xl:p-8">
       <div className="flex flex-col gap-1 md:flex-row md:justify-between">
@@ -22,6 +28,10 @@ export default function RewardCard({ rewardInfo }: RewardCardProps) {
         </div>
         <div className="">
           <button
+            onClick={() => {
+              rewardInfo.left === 0 ? "" : handleMenu();
+              rewardInfo.left === 0 ? "" : handleActivePledge();
+            }}
             className={clsx(
               `${rewardInfo.left === 0 ? "bg-my-gray-500 cursor-not-allowed opacity-30" : "bg-my-green-400 hover:bg-my-green-700 cursor-pointer"} w-[75%] rounded-[10rem] p-4 text-sm font-bold text-white md:w-[10rem] xl:w-[12rem]`,
             )}
