@@ -1,73 +1,132 @@
-# React + TypeScript + Vite
+# 🎁 Crowdfunding Product Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully interactive crowdfunding product page built with **React**, **TypeScript**, and **Tailwind CSS**.  
+Back a beautiful bamboo monitor riser, select or customize your pledge, and watch live funding progress in an engaging user interface.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📸 Preview
 
-## React Compiler
+![Crowdfunding Product Page Screenshot](/screenshot.jpg)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+LIVE: [https://dzik0.github.io/crowdfunding-product-page](https://dzik0.github.io/crowdfunding-product-page)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- 🪵 **Product Presentation:**  
+  Modern, accessible showcase for a handcrafted bamboo monitor riser.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- 💸 **Dynamic Crowdfunding Logic:**  
+  Real-time goal tracking, animated progress bar, current backers and days left.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- 🏆 **Rewards Selection:**  
+  Choose from multiple rewards or set a custom pledge. Only available rewards can be selected.
+
+- 📝 **Custom & Minimum Pledge Logic:**  
+  Inputs with validation—users can’t pledge less than the minimum or to sold-out rewards.
+
+- 📈 **Instant UI Updates:**  
+  Funding progress, total backers, and items left update in real time after pledging.
+
+- ✅ **Donation Flow & Confirmation:**  
+  Seamless donation modal/popup and animated thank you message after submitting a pledge.
+
+- 📱 **Fully Responsive:**  
+  Mobile-first layouts and desktop support via Tailwind CSS.
+
+---
+
+## 🛠️ Tech Stack
+
+- [React](https://react.dev/) (Hooks, functional components)
+- [TypeScript](https://www.typescriptlang.org/) (type safety)
+- [Tailwind CSS](https://tailwindcss.com/) (utility classes & responsiveness)
+- [Vite](https://vitejs.dev/) (bundling & development)
+
+---
+
+## 📁 File Structure
+
+```
+src/
+│
+├── components/
+│   ├── HeaderMobile.tsx
+│   ├── HeaderPc.tsx
+│   ├── RewardCard.tsx
+│   ├── DonationComponent.tsx
+│   ├── DonationCard.tsx
+│   └── DoneMessage.tsx
+├── rewards.ts         # Reward options & types
+├── fund.ts            # Fund progress data & types
+├── App.tsx            # Main product & workflow logic
+├── index.css          # Tailwind and custom styles
+public/
+├── screenshot.jpg     # Preview screenshot
+├── logo-mastercraft.svg
+├── icon-check.svg
+└── ...
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🧠 How It Works
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **Goal progress, backers, and days left** are calculated as state and update in real time with every pledge.
+- **Rewards and custom pledges**:
+  - Users select a reward or enter a custom amount (with validation).
+  - Sold out rewards are visually disabled.
+- **Donation flow**:
+  - Modal interface guides users through donation or reward selection.
+  - Successful pledge triggers a “Thank you!” popup.
+- **Bookmarking**:
+  - Bookmark button toggles and persists visual state until page refresh.
+
+---
+
+## 📦 Installation
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/Dzik0/crowdfunding-product-page.git
+   cd crowdfunding-product-page
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+
+   ```bash
+   npm run dev
+   ```
+
+---
+
+## ✅ Roadmap
+
+- [ ] Persistent local storage for backers/funding/bookmarks
+- [ ] Accessibility improvements
+- [ ] Tests (React Testing Library, Vitest)
+- [ ] More animations & microinteractions
+
+---
+
+## 👨‍💻 Author
+
+**Dzik0**  
+_GitHub: [Dzik0](https://github.com/Dzik0)_
+
+---
+
+## 📝 License
+
+This project is open-source under the [MIT License](LICENSE).
+
+---
