@@ -300,7 +300,7 @@ export default function App() {
                   `border-my-green-400 text-my-green-400 absolute top-1/2 left-1/2 -translate-1/2 rounded-3xl border-2 bg-white p-1 px-6 text-sm font-bold ${showBar ? "absolute" : "hidden"}`,
                 )}
               >
-                {barProgress} %
+                {barProgress.toFixed(0)} %
               </div>
               <div
                 style={style}

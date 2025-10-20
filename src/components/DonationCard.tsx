@@ -49,7 +49,7 @@ export default function DonationCard({
   const pledgeElement = info.active ? (
     <div>
       <div className="mb-5 border-b border-gray-200"></div>
-      <div className="grid gap-3 text-center">
+      <div className="flex flex-col gap-3 text-center xl:flex-row xl:items-center xl:justify-between">
         <h3 className="text-my-gray-500">Enter your pledge</h3>
         <div className="flex gap-3">
           <div className="flex basis-1/2 items-center justify-center gap-2 rounded-3xl border border-gray-300">
@@ -74,7 +74,7 @@ export default function DonationCard({
               closeDonationMenu();
             }}
             className={clsx(
-              `basis-1/2 rounded-3xl p-2 text-white ${error || emptyInput ? "bg-gray-300 hover:bg-gray-300" : "hover:bg-my-green-700 bg-my-green-400"}`,
+              `basis-1/2 cursor-pointer rounded-3xl p-2 text-white ${error || emptyInput ? "bg-gray-300 hover:bg-gray-300" : "hover:bg-my-green-700 bg-my-green-400"}`,
             )}
           >
             Continue
@@ -105,7 +105,7 @@ export default function DonationCard({
           )}
         </div>
         <div className="text-left">
-          <h3>{info.title}</h3>
+          <h3 className="hover:text-my-green-400">{info.title}</h3>
           {info.left === 999 ? (
             ""
           ) : (

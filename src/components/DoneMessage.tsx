@@ -16,7 +16,7 @@ export default function DoneMessage({
     <div
       ref={donateMsgRef}
       className={clsx(
-        `${donated ? "absolute" : "hidden"} right-5 left-5 z-5 h-dvh`,
+        `${donated ? "absolute" : "hidden"} right-5 left-5 z-5 h-dvh xl:right-70 xl:left-70`,
       )}
     >
       <div className="flex h-full items-center justify-center">
@@ -32,7 +32,7 @@ export default function DoneMessage({
           </p>
           <button
             onClick={closeWindow}
-            className="bg-my-green-400 mt-4 rounded-4xl p-4 px-10 font-bold text-white"
+            className="bg-my-green-400 hover:bg-my-green-700 mt-4 cursor-pointer rounded-4xl p-4 px-10 font-bold text-white"
           >
             Got it!
           </button>

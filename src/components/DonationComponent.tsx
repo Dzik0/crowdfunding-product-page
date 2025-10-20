@@ -27,7 +27,7 @@ export default function DonationComponent({
     <div
       ref={donationMenuRef}
       className={clsx(
-        `${stateMenu ? "absolute" : "hidden"} top-15 right-5 left-5 z-5 grid gap-5 rounded-2xl bg-white p-5`,
+        `${stateMenu ? "absolute" : "hidden"} top-15 right-5 left-5 z-5 grid gap-5 rounded-2xl bg-white p-5 xl:right-70 xl:left-70`,
       )}
     >
       <div className="flex items-center justify-between">

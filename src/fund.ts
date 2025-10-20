@@ -7,7 +7,7 @@ export type Fund = {
 
 export const fundData: Fund = {
   goal: 100000,
-  funded: 1223,
+  funded: 68093,
   backers: 5057,
   bookmarked: false,
 };
