@@ -13,6 +13,7 @@ import DoneMessage from "./components/DoneMessage";
 
 type styleProps = {
   width: string;
+  maxWidth: string;
 };
 
 export default function App() {
@@ -44,7 +45,7 @@ export default function App() {
   const displayedFundNow: string = numberDisplay(fundRaiser.funded);
   const displayedBackers: string = numberDisplay(fundRaiser.backers);
   const barProgress: number = (fundRaiser.funded / fundRaiser.goal) * 100;
-  const style: styleProps = { width: `${barProgress}%` };
+  const style: styleProps = { width: `${barProgress}%`, maxWidth: "100%" };
 
   //HTML Components
   const rewardsComp = rewards.map((item: Reward) =>
@@ -147,6 +148,10 @@ export default function App() {
         donateMsgRef={donateMsgRef}
       />
       <div
+        onClick={() => {
+          setOpenMenu(false);
+          setDonationMenu(false);
+        }}
         className={clsx(
           `${openMenu || donationMenu || donated ? "absolute" : "hidden"} z-1 h-full w-full bg-black opacity-30`,
         )}
